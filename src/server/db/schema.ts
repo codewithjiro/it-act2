@@ -1,7 +1,6 @@
 // Example model schema from the Drizzle docs
 // https://orm.drizzle.team/docs/sql-schema-declaration
 
-import { User } from "@clerk/nextjs/server";
 import { sql } from "drizzle-orm";
 import { index, pgTableCreator } from "drizzle-orm/pg-core";
 
@@ -19,7 +18,7 @@ export const images = createTable(
     id: d.integer().primaryKey().generatedByDefaultAsIdentity(),
     fileName: d.varchar({ length: 256 }),
     imageUrl: d.varchar({ length: 1024 }).notNull(),
-    UserId: d.varchar({ length: 64 }).notNull(),
+    userId: d.varchar({ length: 64 }).notNull(),
     createdAt: d
       .timestamp({ withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)
