@@ -18,20 +18,30 @@ async function Images() {
 
   return (
     <div>
-      <div className="flex justify-end p-4">
-        <UploadDialog />
+      {/* Upload dialog centered with dark background */}
+      <div className="flex justify-center bg-gray-900 p-4">
+        <div className="rounded-md bg-gray-800 p-2 shadow-md">
+          <UploadDialog />
+        </div>
       </div>
-      <div className="flex flex-wrap justify-center gap-6 p-4">
+
+      {/* Image gallery */}
+      <div className="flex flex-wrap justify-center gap-6 bg-gray-900 p-6">
         {images.map((image) => (
-          <div key={image.id} className="flex w-64 flex-col">
-            <div className="bg-zinc bg aspect-video bg-zinc-900">
+          <div
+            key={image.id}
+            className="flex w-64 flex-col items-center overflow-hidden rounded-md bg-gray-800 shadow-md"
+          >
+            <div className="flex aspect-video items-center justify-center bg-gray-900">
               <img
                 src={image.url}
-                alt={"Image $(image.id)"}
+                alt={`Image ${image.id}`}
                 className="h-full w-full object-contain object-top"
               />
             </div>
-            <div className="text-center">{image.id}</div>
+            <div className="w-full bg-gray-800 py-2 text-center text-sm text-gray-300">
+              {image.id}
+            </div>
           </div>
         ))}
       </div>
@@ -41,15 +51,23 @@ async function Images() {
 
 export default function HomePage() {
   return (
-    <main className="">
+    <main className="flex min-h-screen w-full flex-col items-center justify-center bg-gray-900 px-4 py-8 text-white sm:px-6 sm:py-12">
       <SignedOut>
-        <div className="h-full w-full text-center text-2xl">
-          Please Sign In Above to Continue!
+        <div className="w-full max-w-md space-y-4 text-center">
+          <h1 className="text-2xl font-semibold sm:text-3xl">
+            You're not signed in
+          </h1>
+          <p className="text-base text-gray-400 sm:text-lg">
+            Please sign in above to continue.
+          </p>
         </div>
       </SignedOut>
+
       <SignedIn>
-        <div className="h-full w-full text-center text-2xl">Welcome, User!</div>
-        <Images />
+        <div className="w-full max-w-3xl space-y-6 text-center">
+          <h1 className="text-2xl font-semibold sm:text-3xl">Welcome back!</h1>
+          <Images />
+        </div>
       </SignedIn>
     </main>
   );
